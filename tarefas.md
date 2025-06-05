@@ -1,0 +1,1 @@
+- [] Trocar Message Body, Res e sendMessage para um objeto só
