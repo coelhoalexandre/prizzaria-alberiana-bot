@@ -1,11 +1,6 @@
-import { Response } from 'express';
-import ChatProperties from './ChatProperties';
+import Message from '../services/Message';
 
 export default interface ProcessInterface {
-  execute: (
-    res: Response,
-    chatProperties: ChatProperties,
-    messageBody: string
-  ) => void;
+  execute: (message: Message) => void;
   currentProcess: number;
 }

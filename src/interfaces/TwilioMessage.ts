@@ -1,4 +1,4 @@
-export default interface Message {
+export default interface TwilioMessage {
   SmsMessageSid: string;
   NumMedia: string;
   ProfileName: string;

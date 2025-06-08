@@ -1,7 +1,10 @@
-import ProcessInterface from './ProcessInterface';
+import ProcessInterface from './ProcessInterface.js';
+import Profile from './Profile.js';
 
 export default interface ChatProperties {
   process: ProcessInterface | null;
-  profile?: { name: string | null; address: string | null };
-  hasRegistration: boolean;
+  sender: {
+    profile?: Profile;
+    hasRegistration: boolean;
+  };
 }

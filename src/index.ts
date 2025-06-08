@@ -1,8 +1,9 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import ChatProperties from './interfaces/ChatProperties.js';
-import Message from './interfaces/Message.js';
+import TwilioMessage from './interfaces/TwilioMessage.js';
 import analyzeMessage from './services/analyzeMessage.js';
+import Message from './services/Message.js';
 
 const chats = new Map<string, ChatProperties>();
 
@@ -12,17 +13,16 @@ const port = 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post('/webhook', async (req, res) => {
-  const message: Message = req.body;
-  const chatProperties: ChatProperties = chats.get(message.WaId) || {
+  const twilioMessage: TwilioMessage = req.body;
+  const chatProperties: ChatProperties = chats.get(twilioMessage.WaId) || {
     process: null,
-    hasRegistration: false,
+    sender: { hasRegistration: false },
   };
+  const message = new Message({ twilioMessage, chatProperties, response: res });
 
-  console.log('Mensagem: ', message);
+  analyzeMessage(message);
 
-  analyzeMessage(res, chatProperties, message);
-
-  chats.set(message.WaId, chatProperties);
+  chats.set(twilioMessage.WaId, message.chat);
 });
 
 app.post('/status', async (req, res) => {

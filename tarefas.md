@@ -1,1 +1,4 @@
-- [] Trocar Message Body, Res e sendMessage para um objeto só
+- Melhorar o fluxo de mensagens
+- Adicionar mensagem para comando não encontrado
+- Adicionar outros comandos
+- Fazer um log de status e mensagens
